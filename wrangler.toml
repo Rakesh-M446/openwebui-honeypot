@@ -1,0 +1,52 @@
+
+# wrangler.toml
+
+name = "openwebui-honeypot-gateway" # Worker 的默认名称
+main = "src/index.js"              # 入口文件路径
+compatibility_date = "2025-06-10"  # 兼容性日期，使用一个最近的日期
+
+# 定义部署时需要创建的 KV 命名空间
+[[kv_namespaces]]
+binding = "RATE_LIMITER_KV" # 代码中使用的绑定名称
+# id 或 preview_id 在一键部署时会被自动填充，这里留空即可
+
+# 定义部署时需要用户填写的环境变量
+[vars]
+# 部署向导会提示用户输入这个值
+UPSTREAM_URL = "https://your-openwebui-backend.com"
+
+# 为 HONEYPOT_CONFIG 提供一个高质量的默认值
+HONEYPOT_CONFIG = '''
+{
+  "blocked_ips": [],
+  "malicious_asns": [
+    14061,
+    16276,
+    24940,
+    396982
+  ],
+  "malicious_uas": [
+    "Go-http-client",
+    "python-requests",
+    "Java/1.8",
+    "Java/11",
+    "Java/17",
+    "curl",
+    "wget",
+    "aiohttp",
+    "okhttp",
+    "Dalvik",
+    "node-fetch",
+    "undici",
+    "Scrapy",
+    "Nutch",
+    "masscan",
+    "nmap",
+    "zgrab",
+    "nuclei",
+    "sqlmap",
+    "BurpSuite",
+    "Acunetix"
+  ]
+}
+'''
