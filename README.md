@@ -2,7 +2,7 @@
 
 一个为 OpenWebUI 设计的 Cloudflare Worker 安全网关，用于识别和迷惑恶意请求、消耗其 Token，并保护你的后端服务。
 
-[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME)
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/MeiTetsuH/openwebui-honeypot)
 
 *(↑ 部署成功后，记得把上面的 YOUR_USERNAME 和 YOUR_REPOSITORY_NAME 换成你自己的！)*
 
@@ -52,7 +52,7 @@
 
 A security gateway powered by Cloudflare Workers, designed to protect your OpenWebUI instance by identifying, rate-limiting, and decoying malicious bots to waste their API tokens.
 
-[](https://deploy.workers.cloudflare.com/?url=https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME)
+[](https://deploy.workers.cloudflare.com/?url=https://github.com/MeiTetsuH/openwebui-honeypot)
 
 *(↑ After deploying, remember to replace `YOUR_USERNAME` and `YOUR_REPOSITORY_NAME` above with your own\!)*
 
