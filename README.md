@@ -4,7 +4,6 @@
 
 [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/MeiTetsuH/openwebui-honeypot)
 
-*(↑ 部署成功后，记得把上面的 YOUR_USERNAME 和 YOUR_REPOSITORY_NAME 换成你自己的！)*
 
 ---
 
@@ -44,7 +43,7 @@
 
 ---
 
-*由 [MEItetsu] 创建，灵感和代码优化来自社区。*
+*由 [MeiTetsuH] 创建，灵感和代码优化来自社区。*
 
 
 
@@ -54,7 +53,6 @@ A security gateway powered by Cloudflare Workers, designed to protect your OpenW
 
 [](https://deploy.workers.cloudflare.com/?url=https://github.com/MeiTetsuH/openwebui-honeypot)
 
-*(↑ After deploying, remember to replace `YOUR_USERNAME` and `YOUR_REPOSITORY_NAME` above with your own\!)*
 
 -----
 
@@ -97,4 +95,4 @@ This project is open-sourced under the [MIT License](https://www.google.com/sear
 
 -----
 
-*Created by [MEItetsu], with inspiration and code optimizations from the community.*
+*Created by [MeiTetsuH], with inspiration and code optimizations from the community.*
